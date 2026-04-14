@@ -60,7 +60,7 @@
 
 /* Auto-responsive grids that adapt to content */
 .grid-responsive-auto {
-  @apply grid auto-cols-fr gap-4 sm:gap-6;
+  @apply grid auto-cols-max gap-4 sm:gap-6;
 }
 
 /* Standard responsive grid - 1 col on mobile, 2 on tablet, 3 on desktop */
@@ -178,7 +178,7 @@
 
 /* Mobile drawer state */
 .drawer-mobile {
-  @apply fixed inset-0 z-50 sm:z-auto sm:position-static;
+  @apply fixed inset-0 z-50 sm:static;
 }
 
 /* ============================================

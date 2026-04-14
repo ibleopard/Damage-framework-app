@@ -100,9 +100,11 @@ export function NewAssessment() {
   return (
     <Layout title="New Damage Assessment">
       <div className="w-full max-w-2xl lg:max-w-4xl mx-auto px-4 sm:px-6 md:px-0">
-        {/* Progress Bar */}
-        <div className="bg-white rounded-xl shadow-md p-3 sm:p-4 md:p-6 mb-4 sm:mb-6">
-          {/* Desktop/Tablet Progress View */}
+        {/* Premium Progress Stepper */}
+        <div className="card card-elevated rounded-2xl p-6 sm:p-8 mb-6 sm:mb-8 overflow-hidden"
+          style={{ background: 'linear-gradient(135deg, white 0%, #F9FAFB 100%)' }}>
+          
+          {/* Desktop/Tablet Stepper */}
           <div className="hidden sm:flex items-center justify-between gap-2 md:gap-4">
             {steps.map((step, index) => {
               const Icon = step.icon;
@@ -112,67 +114,93 @@ export function NewAssessment() {
               return (
                 <div key={step.number} className="flex items-center flex-1">
                   <div className="flex flex-col items-center flex-1">
-                    <div
-                      className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all flex-shrink-0 ${
-                        isActive ? 'text-white' : isCompleted ? 'text-white' : 'text-gray-400 bg-gray-100'
-                      }`}
-                      style={isActive ? { backgroundColor: '#0B3C5D' } : isCompleted ? { backgroundColor: '#2ECC71' } : {}}
-                    >
-                      <Icon className="w-5 h-5 md:w-6 md:h-6" />
+                    {/* Step Circle */}
+                    <div className="relative w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full flex-shrink-0 group transition-all duration-200"
+                      style={
+                        isActive 
+                          ? {
+                              background: 'linear-gradient(135deg, #0B3C5D 0%, #1A5A8C 100%)',
+                              boxShadow: '0 8px 20px rgba(11, 60, 93, 0.3), 0 0 1px rgba(255, 255, 255, 0.5) inset'
+                            }
+                          : isCompleted
+                          ? {
+                              background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                              boxShadow: '0 4px 12px rgba(16, 185, 129, 0.2)'
+                            }
+                          : {
+                              backgroundColor: '#F3F4F6',
+                              border: '2px solid #E5E7EB'
+                            }
+                      }>
+                      {isCompleted ? (
+                        <CheckCircle className="w-6 h-6 md:w-7 md:h-7 text-white" />
+                      ) : (
+                        <Icon className={`w-6 h-6 md:w-7 md:h-7 ${isActive ? 'text-white' : 'text-gray-400'}`} />
+                      )}
                     </div>
-                    <p className={`mt-2 text-xs md:text-sm ${isActive ? 'font-medium' : ''}`} style={isActive ? { color: '#0B3C5D' } : {}}>
+                    <p className={`mt-3 text-xs md:text-sm font-medium whitespace-nowrap transition-colors ${
+                      isActive ? 'font-bold' : ''
+                    }`} style={isActive ? { color: '#0B3C5D' } : { color: isCompleted ? '#10B981' : '#9CA3AF' }}>
                       {step.label}
                     </p>
                   </div>
+                  
+                  {/* Connector Line */}
                   {index < steps.length - 1 && (
-                    <div className={`h-1 flex-1 mx-1 md:mx-2 rounded ${isCompleted ? 'bg-green-500' : 'bg-gray-200'}`} 
-                      style={isCompleted ? { backgroundColor: '#2ECC71' } : {}}
-                    />
+                    <div className="h-1 flex-1 mx-1 md:mx-2 rounded-full transition-all duration-300 flex-shrink-0" 
+                      style={isCompleted ? { background: 'linear-gradient(90deg, #10B981 0%, #10B981 100%)' } : { backgroundColor: '#E5E7EB' }} />
                   )}
                 </div>
               );
             })}
           </div>
 
-          {/* Mobile Progress View */}
-          <div className="sm:hidden">
-            <div className="flex items-center justify-between mb-2">
-              <p className="text-sm font-medium" style={{ color: '#0B3C5D' }}>
+          {/* Mobile Progress Bar */}
+          <div className="sm:hidden space-y-3">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-bold" style={{ color: '#0B3C5D' }}>
                 Step {currentStep} of {steps.length}
               </p>
-              <p className="text-xs text-gray-600">{steps[currentStep - 1]?.label}</p>
+              <p className="text-xs text-gray-600 font-medium">{steps[currentStep - 1]?.label}</p>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
+            <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
               <div
-                className="h-2 rounded-full transition-all duration-300"
+                className="h-full rounded-full transition-all duration-300"
                 style={{
                   width: `${(currentStep / steps.length) * 100}%`,
-                  backgroundColor: '#0B3C5D'
+                  background: 'linear-gradient(90deg, #0B3C5D 0%, #328CC1 100%)',
+                  boxShadow: '0 0 8px rgba(11, 60, 93, 0.3)'
                 }}
               />
             </div>
           </div>
         </div>
 
-        {/* Form Content */}
-        <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 md:p-8">
+        {/* Form Card */}
+        <div className="card card-elevated rounded-2xl p-6 sm:p-8 md:p-10 overflow-hidden"
+          style={{ background: 'linear-gradient(135deg, white 0%, #F9FAFB 100%)' }}>
+          
           {/* Step 1: Location */}
           {currentStep === 1 && (
-            <div className="space-y-4 sm:space-y-5">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: '#0B3C5D' }}>
-                Location Details
-              </h2>
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: '#0B3C5D' }}>
+                  Location Details
+                </h2>
+                <p className="text-sm text-gray-600">
+                  Enter the precise location of the damaged infrastructure
+                </p>
+              </div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <div>
-                  <label className="block mb-2 text-xs sm:text-sm font-medium text-gray-700">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="form-group">
+                  <label className="block mb-2.5 text-sm font-bold text-gray-900">
                     Province / Region
                   </label>
                   <select
                     value={formData.province}
                     onChange={(e) => updateFormData("province", e.target.value)}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-sm"
-                    style={{ focusRingColor: '#328CC1' }}
+                    className="input-field"
                   >
                     <option value="">Select Province</option>
                     <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
@@ -183,56 +211,56 @@ export function NewAssessment() {
                   </select>
                 </div>
 
-                <div>
-                  <label className="block mb-2 text-xs sm:text-sm font-medium text-gray-700">
+                <div className="form-group">
+                  <label className="block mb-2.5 text-sm font-bold text-gray-900">
                     District / City
                   </label>
                   <input
                     type="text"
                     value={formData.city}
                     onChange={(e) => updateFormData("city", e.target.value)}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-sm"
+                    className="input-field"
                     placeholder="e.g., District Ghanche"
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="block mb-2 text-xs sm:text-sm font-medium text-gray-700">
+              <div className="form-group">
+                <label className="block mb-2.5 text-sm font-bold text-gray-900">
                   Full Address
                 </label>
                 <textarea
                   value={formData.address}
                   onChange={(e) => updateFormData("address", e.target.value)}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-sm"
+                  className="input-field resize-none"
                   rows={3}
                   placeholder="Enter complete address with landmarks"
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <div>
-                  <label className="block mb-2 text-xs sm:text-sm font-medium text-gray-700">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="form-group">
+                  <label className="block mb-2.5 text-sm font-bold text-gray-900">
                     Latitude
                   </label>
                   <input
                     type="text"
                     value={formData.latitude}
                     onChange={(e) => updateFormData("latitude", e.target.value)}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-sm"
+                    className="input-field"
                     placeholder="35.1988 N"
                   />
                 </div>
 
-                <div>
-                  <label className="block mb-2 text-xs sm:text-sm font-medium text-gray-700">
+                <div className="form-group">
+                  <label className="block mb-2.5 text-sm font-bold text-gray-900">
                     Longitude
                   </label>
                   <input
                     type="text"
                     value={formData.longitude}
                     onChange={(e) => updateFormData("longitude", e.target.value)}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-sm"
+                    className="input-field"
                     placeholder="76.6003 E"
                   />
                 </div>
@@ -240,13 +268,9 @@ export function NewAssessment() {
 
               <button
                 onClick={autoDetectLocation}
-                className="flex items-center justify-center sm:justify-start gap-2 w-full sm:w-auto px-3 sm:px-4 py-2 sm:py-3 rounded-lg border-2 transition-all hover:opacity-80 text-sm"
-                style={{ 
-                  borderColor: '#328CC1',
-                  color: '#328CC1'
-                }}
+                className="btn-secondary btn-md"
               >
-                <Locate className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Locate className="w-5 h-5" />
                 Auto-detect GPS
               </button>
             </div>
@@ -254,19 +278,24 @@ export function NewAssessment() {
 
           {/* Step 2: Structure */}
           {currentStep === 2 && (
-            <div className="space-y-4 sm:space-y-5">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: '#0B3C5D' }}>
-                Structure Information
-              </h2>
-              
+            <div className="space-y-6">
               <div>
-                <label className="block mb-2 text-xs sm:text-sm font-medium text-gray-700">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: '#0B3C5D' }}>
+                  Structure Information
+                </h2>
+                <p className="text-sm text-gray-600">
+                  Describe the building structure and its original use
+                </p>
+              </div>
+
+              <div className="form-group">
+                <label className="block mb-2.5 text-sm font-bold text-gray-900">
                   Building Type
                 </label>
                 <select
                   value={formData.buildingType}
                   onChange={(e) => updateFormData("buildingType", e.target.value)}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-sm"
+                  className="input-field"
                 >
                   <option value="">Select Building Type</option>
                   <option value="Residential">Residential</option>
@@ -278,28 +307,28 @@ export function NewAssessment() {
                 </select>
               </div>
 
-              <div>
-                <label className="block mb-2 text-xs sm:text-sm font-medium text-gray-700">
+              <div className="form-group">
+                <label className="block mb-2.5 text-sm font-bold text-gray-900">
                   Primary Usage
                 </label>
                 <input
                   type="text"
                   value={formData.usage}
                   onChange={(e) => updateFormData("usage", e.target.value)}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-sm"
+                  className="input-field"
                   placeholder="e.g., Single family home, Office building"
                 />
               </div>
 
-              <div>
-                <label className="block mb-2 text-xs sm:text-sm font-medium text-gray-700">
+              <div className="form-group">
+                <label className="block mb-2.5 text-sm font-bold text-gray-900">
                   Year Built (if known)
                 </label>
                 <input
                   type="text"
                   value={formData.yearBuilt}
                   onChange={(e) => updateFormData("yearBuilt", e.target.value)}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-sm"
+                  className="input-field"
                   placeholder="e.g., 2010"
                 />
               </div>
@@ -308,26 +337,33 @@ export function NewAssessment() {
 
           {/* Step 3: Damage */}
           {currentStep === 3 && (
-            <div className="space-y-4 sm:space-y-5">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: '#0B3C5D' }}>
-                Damage Assessment
-              </h2>
-              
+            <div className="space-y-6">
               <div>
-                <label className="block mb-3 text-xs sm:text-sm font-medium text-gray-700">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: '#0B3C5D' }}>
+                  Damage Assessment
+                </h2>
+                <p className="text-sm text-gray-600">
+                  Assess the severity and specific issues observed
+                </p>
+              </div>
+
+              <div>
+                <label className="block mb-4 text-sm font-bold text-gray-900">
                   Damage Level
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                   {[
-                    { value: "Minor", color: "#2ECC71", label: "Minor (Repair Req.)" },
-                    { value: "Moderate", color: "#F39C12", label: "Moderate (Major Repairs)" },
-                    { value: "Severe", color: "#E74C3C", label: "Severe (Reconstruction)" },
+                    { value: "Minor", color: "#10B981", label: "Minor (Repair Req.)" },
+                    { value: "Moderate", color: "#F59E0B", label: "Moderate (Major Repairs)" },
+                    { value: "Severe", color: "#EF4444", label: "Severe (Reconstruction)" },
                   ].map((level) => (
                     <button
                       key={level.value}
                       onClick={() => updateFormData("damageLevel", level.value)}
-                      className={`p-3 sm:p-4 rounded-lg border-2 transition-all text-xs sm:text-sm font-medium ${
-                        formData.damageLevel === level.value ? 'text-white' : 'bg-white'
+                      className={`p-4 sm:p-5 rounded-xl border-2 transition-all duration-200 font-bold text-sm sm:text-base group ${
+                        formData.damageLevel === level.value 
+                          ? 'text-white shadow-lg' 
+                          : 'bg-white hover:shadow-md'
                       }`}
                       style={{
                         borderColor: level.color,
@@ -342,10 +378,10 @@ export function NewAssessment() {
               </div>
 
               <div>
-                <label className="block mb-3 text-xs sm:text-sm font-medium text-gray-700">
+                <label className="block mb-4 text-sm font-bold text-gray-900">
                   Structural Issues (Select all that apply)
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {[
                     "Foundation Damage",
                     "Wall Cracks",
@@ -356,29 +392,29 @@ export function NewAssessment() {
                   ].map((issue) => (
                     <label
                       key={issue}
-                      className="flex items-center gap-3 p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 text-sm"
+                      className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all duration-200 group"
                     >
                       <input
                         type="checkbox"
                         checked={formData.structuralIssues.includes(issue)}
                         onChange={() => toggleIssue(issue)}
-                        className="w-4 h-4 sm:w-5 sm:h-5"
+                        className="w-5 h-5 rounded transition-all"
                         style={{ accentColor: '#0B3C5D' }}
                       />
-                      <span>{issue}</span>
+                      <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{issue}</span>
                     </label>
                   ))}
                 </div>
               </div>
 
-              <div>
-                <label className="block mb-2 text-xs sm:text-sm font-medium text-gray-700">
+              <div className="form-group">
+                <label className="block mb-2.5 text-sm font-bold text-gray-900">
                   Detailed Description
                 </label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => updateFormData("description", e.target.value)}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-sm"
+                  className="input-field resize-none"
                   rows={5}
                   placeholder="Describe the damage in detail, including any immediate safety concerns..."
                 />
@@ -388,21 +424,26 @@ export function NewAssessment() {
 
           {/* Step 4: Evidence */}
           {currentStep === 4 && (
-            <div className="space-y-4 sm:space-y-5">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: '#0B3C5D' }}>
-                Upload Evidence
-              </h2>
-              
+            <div className="space-y-6">
               <div>
-                <label className="block mb-3 text-xs sm:text-sm font-medium text-gray-700">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: '#0B3C5D' }}>
+                  Upload Evidence
+                </h2>
+                <p className="text-sm text-gray-600">
+                  Upload photos and documents as supporting evidence
+                </p>
+              </div>
+
+              <div>
+                <label className="block mb-3 text-sm font-bold text-gray-900">
                   Photographs
                 </label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 sm:p-6 md:p-8 text-center hover:bg-gray-50 transition-colors">
-                  <Upload className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-2 sm:mb-3 text-gray-400" />
-                  <p className="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">
+                <div className="border-2 border-dashed border-gray-300 rounded-2xl p-8 sm:p-10 text-center hover:border-blue-400 hover:bg-blue-50 transition-all duration-200 group">
+                  <Upload className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4 text-gray-400 group-hover:text-blue-500 transition-colors" />
+                  <p className="text-sm font-bold text-gray-900 mb-1">
                     Drag & drop photos or click to browse
                   </p>
-                  <p className="text-xs text-gray-500 mb-3 sm:mb-4">
+                  <p className="text-xs text-gray-600 mb-5">
                     Supported: JPG, PNG (Max 10MB each)
                   </p>
                   <input
@@ -415,13 +456,12 @@ export function NewAssessment() {
                   />
                   <label
                     htmlFor="photos"
-                    className="inline-block px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-white cursor-pointer transition-all hover:opacity-90 text-xs sm:text-sm"
-                    style={{ backgroundColor: '#328CC1' }}
+                    className="btn-secondary btn-md inline-flex"
                   >
                     Choose Files
                   </label>
                   {formData.photos.length > 0 && (
-                    <p className="mt-2 sm:mt-3 text-xs sm:text-sm" style={{ color: '#2ECC71' }}>
+                    <p className="mt-4 text-sm font-bold" style={{ color: '#10B981' }}>
                       ✓ {formData.photos.length} file(s) selected
                     </p>
                   )}
@@ -429,15 +469,15 @@ export function NewAssessment() {
               </div>
 
               <div>
-                <label className="block mb-3 text-xs sm:text-sm font-medium text-gray-700">
+                <label className="block mb-3 text-sm font-bold text-gray-900">
                   Documents (PDFs, Reports)
                 </label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 sm:p-6 md:p-8 text-center hover:bg-gray-50 transition-colors">
-                  <Upload className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-2 sm:mb-3 text-gray-400" />
-                  <p className="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">
+                <div className="border-2 border-dashed border-gray-300 rounded-2xl p-8 sm:p-10 text-center hover:border-blue-400 hover:bg-blue-50 transition-all duration-200 group">
+                  <Upload className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4 text-gray-400 group-hover:text-blue-500 transition-colors" />
+                  <p className="text-sm font-bold text-gray-900 mb-1">
                     Upload assessment forms or handwritten notes
                   </p>
-                  <p className="text-xs text-gray-500 mb-3 sm:mb-4">
+                  <p className="text-xs text-gray-600 mb-5">
                     Supported: PDF, DOC (Max 20MB)
                   </p>
                   <input
@@ -450,13 +490,12 @@ export function NewAssessment() {
                   />
                   <label
                     htmlFor="documents"
-                    className="inline-block px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-white cursor-pointer transition-all hover:opacity-90 text-xs sm:text-sm"
-                    style={{ backgroundColor: '#328CC1' }}
+                    className="btn-secondary btn-md inline-flex"
                   >
                     Choose Files
                   </label>
                   {formData.documents.length > 0 && (
-                    <p className="mt-2 sm:mt-3 text-xs sm:text-sm" style={{ color: '#2ECC71' }}>
+                    <p className="mt-4 text-sm font-bold" style={{ color: '#10B981' }}>
                       ✓ {formData.documents.length} file(s) selected
                     </p>
                   )}
@@ -467,93 +506,108 @@ export function NewAssessment() {
 
           {/* Step 5: Review */}
           {currentStep === 5 && (
-            <div className="space-y-4 sm:space-y-5">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: '#0B3C5D' }}>
-                Review & Submit
-              </h2>
-              
-              <div className="space-y-3 sm:space-y-4">
-                <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
-                  <h3 className="text-sm sm:text-lg font-medium mb-2" style={{ color: '#0B3C5D' }}>
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: '#0B3C5D' }}>
+                  Review & Submit
+                </h2>
+                <p className="text-sm text-gray-600">
+                  Please review all information carefully before submitting
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="card rounded-xl p-5 sm:p-6 border-l-4" style={{ borderLeftColor: '#0B3C5D', background: 'linear-gradient(135deg, #F9FAFB 0%, white 100%)' }}>
+                  <h3 className="text-base sm:text-lg font-bold mb-3" style={{ color: '#0B3C5D' }}>
                     Location
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-700 font-medium">
-                    {formData.province}, {formData.city}
-                  </p>
-                  <p className="text-xs sm:text-sm text-gray-600">{formData.address}</p>
-                  <p className="text-xs sm:text-sm text-gray-600">
-                    GPS: {formData.latitude}, {formData.longitude}
-                  </p>
+                  <div className="space-y-1.5 text-sm">
+                    <p className="text-gray-700 font-semibold">
+                      {formData.province}, {formData.city}
+                    </p>
+                    <p className="text-gray-600">{formData.address}</p>
+                    <p className="text-gray-600">
+                      GPS: {formData.latitude}, {formData.longitude}
+                    </p>
+                  </div>
                 </div>
 
-                <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
-                  <h3 className="text-sm sm:text-lg font-medium mb-2" style={{ color: '#0B3C5D' }}>
+                <div className="card rounded-xl p-5 sm:p-6 border-l-4" style={{ borderLeftColor: '#328CC1', background: 'linear-gradient(135deg, #F9FAFB 0%, white 100%)' }}>
+                  <h3 className="text-base sm:text-lg font-bold mb-3" style={{ color: '#328CC1' }}>
                     Structure
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-700 font-medium">Type: {formData.buildingType}</p>
-                  <p className="text-xs sm:text-sm text-gray-600">Usage: {formData.usage}</p>
-                  <p className="text-xs sm:text-sm text-gray-600">Year Built: {formData.yearBuilt || "N/A"}</p>
+                  <div className="space-y-1.5 text-sm">
+                    <p className="text-gray-700 font-semibold">Type: {formData.buildingType}</p>
+                    <p className="text-gray-600">Usage: {formData.usage}</p>
+                    <p className="text-gray-600">Year Built: {formData.yearBuilt || "N/A"}</p>
+                  </div>
                 </div>
 
-                <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
-                  <h3 className="text-sm sm:text-lg font-medium mb-2" style={{ color: '#0B3C5D' }}>
+                <div className="card rounded-xl p-5 sm:p-6 border-l-4" style={{ borderLeftColor: '#F59E0B', background: 'linear-gradient(135deg, #F9FAFB 0%, white 100%)' }}>
+                  <h3 className="text-base sm:text-lg font-bold mb-3" style={{ color: '#F59E0B' }}>
                     Damage Assessment
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-700 font-medium">Level: {formData.damageLevel}</p>
-                  <p className="text-xs sm:text-sm text-gray-600">
-                    Issues: {formData.structuralIssues.join(", ") || "None selected"}
-                  </p>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-2">{formData.description}</p>
+                  <div className="space-y-1.5 text-sm">
+                    <p className="text-gray-700 font-semibold">Level: {formData.damageLevel}</p>
+                    <p className="text-gray-600">
+                      Issues: {formData.structuralIssues.join(", ") || "None selected"}
+                    </p>
+                    <p className="text-gray-600 mt-2">{formData.description}</p>
+                  </div>
                 </div>
 
-                <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
-                  <h3 className="text-sm sm:text-lg font-medium mb-2" style={{ color: '#0B3C5D' }}>
+                <div className="card rounded-xl p-5 sm:p-6 border-l-4" style={{ borderLeftColor: '#10B981', background: 'linear-gradient(135deg, #F9FAFB 0%, white 100%)' }}>
+                  <h3 className="text-base sm:text-lg font-bold mb-3" style={{ color: '#10B981' }}>
                     Evidence
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-700 font-medium">
-                    Photos: {formData.photos.length} file(s)
-                  </p>
-                  <p className="text-xs sm:text-sm text-gray-600">
-                    Documents: {formData.documents.length} file(s)
-                  </p>
+                  <div className="space-y-1.5 text-sm">
+                    <p className="text-gray-700 font-semibold">
+                      Photos: {formData.photos.length} file(s)
+                    </p>
+                    <p className="text-gray-600">
+                      Documents: {formData.documents.length} file(s)
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className="p-3 sm:p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <p className="text-xs sm:text-sm text-blue-800">
-                  Please review all information carefully before submitting. Once submitted, this assessment will be sent for review.
+              <div className="p-4 sm:p-5 rounded-xl border-l-4 border-blue-400" style={{ backgroundColor: '#EFF6FF' }}>
+                <p className="text-sm text-blue-900 font-medium">
+                  ✓ All information looks complete! Once submitted, this assessment will be sent for review by NDMA officials.
                 </p>
               </div>
             </div>
           )}
 
           {/* Navigation Buttons */}
-          <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-4 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200">
+          <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-4 mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-gray-200 order-last sm:order-none">
             <button
               onClick={handlePrevious}
               disabled={currentStep === 1}
-              className="flex items-center justify-center gap-2 w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 rounded-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base order-2 sm:order-1"
+              className="btn-outline btn-lg flex items-center justify-center gap-2 order-2 sm:order-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+              <ChevronLeft className="w-5 h-5" />
               Previous
             </button>
 
             {currentStep < 5 ? (
               <button
                 onClick={handleNext}
-                className="flex items-center justify-center gap-2 w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-white transition-all hover:opacity-90 text-sm sm:text-base order-1 sm:order-2"
-                style={{ backgroundColor: '#0B3C5D' }}
+                className="btn-primary btn-lg flex items-center justify-center gap-2 order-1 sm:order-2"
               >
                 Next
-                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                <ChevronRight className="w-5 h-5" />
               </button>
             ) : (
               <button
                 onClick={handleSubmit}
-                className="flex items-center justify-center gap-2 w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-white transition-all hover:opacity-90 text-sm sm:text-base order-1 sm:order-2"
-                style={{ backgroundColor: '#2ECC71' }}
+                className="btn-lg flex items-center justify-center gap-2 order-1 sm:order-2 text-white font-bold transition-all duration-200 group"
+                style={{
+                  background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                  boxShadow: '0 8px 16px rgba(16, 185, 129, 0.3)',
+                }}
               >
-                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+                <CheckCircle className="w-5 h-5" />
                 Submit Assessment
               </button>
             )}

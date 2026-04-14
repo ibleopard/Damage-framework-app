@@ -1,101 +1,133 @@
 import { Layout } from "./Layout";
 import { useNavigate } from "react-router";
-import { FileText, Upload, CheckCircle, Clock, AlertTriangle, TrendingUp } from "lucide-react";
+import { FileText, Upload, CheckCircle, Clock, AlertTriangle, TrendingUp, ArrowRight } from "lucide-react";
 
 export function Dashboard() {
   const navigate = useNavigate();
 
   const stats = [
-    { label: "Total Submissions", value: "234", icon: FileText, color: "#0B3C5D" },
-    { label: "Pending Reviews", value: "18", icon: Clock, color: "#328CC1" },
-    { label: "Approved", value: "189", icon: CheckCircle, color: "#2ECC71" },
-    { label: "Critical Cases", value: "12", icon: AlertTriangle, color: "#E74C3C" },
+    { label: "Total Submissions", value: "234", icon: FileText, color: "#0B3C5D", bgLight: "#E8F1F7" },
+    { label: "Pending Reviews", value: "18", icon: Clock, color: "#328CC1", bgLight: "#E0F4FF" },
+    { label: "Approved", value: "189", icon: CheckCircle, color: "#10B981", bgLight: "#ECFDF5" },
+    { label: "Critical Cases", value: "12", icon: AlertTriangle, color: "#EF4444", bgLight: "#FEF2F2" },
   ];
 
   return (
     <Layout title="Welcome back, Field Inspector">
-      {/* Welcome Card */}
-      <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 md:p-8 mb-6 sm:mb-8" style={{ borderLeft: '4px solid #0B3C5D' }}>
-        <div className="flex flex-col md:flex-row items-start justify-between gap-4">
+      {/* Premium Welcome Card */}
+      <div className="card card-elevated rounded-2xl p-6 sm:p-8 md:p-10 mb-8 sm:mb-10 overflow-hidden relative"
+        style={{ 
+          background: 'linear-gradient(135deg, white 0%, #F9FAFB 100%)',
+          borderLeft: '6px solid #0B3C5D'
+        }}>
+        <div className="absolute top-0 right-0 w-40 h-40 opacity-5 pointer-events-none">
+          <TrendingUp className="w-full h-full" color="#0B3C5D" />
+        </div>
+        
+        <div className="flex flex-col md:flex-row items-start justify-between gap-6 relative z-10">
           <div className="flex-1 min-w-0">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2" style={{ color: '#0B3C5D' }}>
+            <h2 className="text-2xl sm:text-3xl md:text-3xl font-bold mb-3" style={{ color: '#0B3C5D' }}>
               Start Your Assessment
             </h2>
-            <p className="text-sm sm:text-base text-gray-600 mb-4">
-              Document infrastructure damage efficiently with our streamlined process
+            <p className="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed max-w-2xl">
+              Document infrastructure damage efficiently. Complete assessments through our streamlined, step-by-step process with GPS tracking and photo verification.
             </p>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button
                 onClick={() => navigate("/new-assessment")}
-                className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-white transition-all hover:opacity-90 flex items-center justify-center sm:justify-start gap-2 text-sm sm:text-base"
-                style={{ backgroundColor: '#0B3C5D' }}
+                className="btn-primary btn-lg group flex items-center justify-center"
               >
-                <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
-                Start New Assessment
+                <FileText className="w-5 h-5" />
+                <span>Start New Assessment</span>
+                <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity ml-1" />
               </button>
               <button
                 onClick={() => navigate("/ai-autofill")}
-                className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg border-2 transition-all hover:opacity-80 flex items-center justify-center sm:justify-start gap-2 text-sm sm:text-base"
-                style={{ 
-                  borderColor: '#328CC1',
-                  color: '#328CC1',
-                  backgroundColor: 'transparent'
-                }}
+                className="btn-secondary btn-lg"
               >
-                <Upload className="w-4 h-4 sm:w-5 sm:h-5" />
-                Upload Form
+                <Upload className="w-5 h-5" />
+                <span>Upload Form</span>
               </button>
             </div>
           </div>
-          <TrendingUp className="w-10 h-10 sm:w-12 sm:h-12 text-gray-300 flex-shrink-0" />
         </div>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
+      {/* Stats Grid - Premium Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-10">
         {stats.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <div key={index} className="bg-white rounded-xl shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow">
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${stat.color}15` }}>
-                  <Icon className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: stat.color }} />
+            <div 
+              key={index} 
+              className="card rounded-2xl p-6 sm:p-7 hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-1 cursor-default group"
+              style={{ 
+                borderTop: `4px solid ${stat.color}`,
+                background: `linear-gradient(135deg, white 0%, ${stat.bgLight} 100%)`
+              }}
+            >
+              <div className="flex items-start justify-between mb-5">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center flex-shrink-0" 
+                  style={{ backgroundColor: `${stat.color}15`, color: stat.color }}>
+                  <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
+                </div>
+                <div className="text-xs font-bold px-2 py-1 rounded-lg" style={{ 
+                  backgroundColor: `${stat.color}15`, 
+                  color: stat.color 
+                }}>
+                  {index === 0 ? '+12%' : index === 1 ? '+5%' : index === 2 ? '+8%' : '-3%'}
                 </div>
               </div>
-              <p className="text-2xl sm:text-3xl font-bold mb-1" style={{ color: stat.color }}>
+              <p className="text-3xl sm:text-4xl font-bold mb-2" style={{ color: stat.color }}>
                 {stat.value}
               </p>
-              <p className="text-xs sm:text-sm text-gray-600">{stat.label}</p>
+              <p className="text-sm text-gray-600 font-medium">{stat.label}</p>
+              <div className="mt-4 pt-4 border-t border-gray-200 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-gray-500">
+                Updated today
+              </div>
             </div>
           );
         })}
       </div>
 
-      {/* Recent Activity */}
-      <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
-        <h3 className="text-lg sm:text-xl font-semibold mb-4" style={{ color: '#0B3C5D' }}>
-          Recent Submissions
-        </h3>
-        <div className="space-y-2 sm:space-y-3">
+      {/* Recent Submissions Section */}
+      <div className="card rounded-2xl p-6 sm:p-8">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h3 className="text-xl sm:text-2xl font-bold" style={{ color: '#0B3C5D' }}>
+              Recent Submissions
+            </h3>
+            <p className="text-sm text-gray-500 mt-1">Latest damage assessments from field inspectors</p>
+          </div>
+          <button 
+            onClick={() => navigate("/my-submissions")}
+            className="hidden sm:flex items-center gap-2 text-sm font-medium hover:opacity-80 transition-opacity" 
+            style={{ color: '#328CC1' }}>
+            View All
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+
+        <div className="space-y-3">
           {[
-            { location: "District Ghanche, Ghulshan-e-Kabbir", date: "March 25, 2026", status: "Pending", statusColor: "#328CC1" },
-            { location: "District Skardu, Sadpara", date: "March 24, 2026", status: "Approved", statusColor: "#2ECC71" },
-            { location: "District Gilgit, Jutial", date: "March 23, 2026", status: "Approved", statusColor: "#2ECC71" },
-            { location: "District Hunza, Karimabad", date: "March 22, 2026", status: "Pending", statusColor: "#328CC1" },
+            { location: "District Ghanche, Ghulshan-e-Kabbir", date: "March 25, 2026", status: "Pending", statusColor: "#328CC1", statusBg: "#E0F4FF" },
+            { location: "District Skardu, Sadpara", date: "March 24, 2026", status: "Approved", statusColor: "#10B981", statusBg: "#ECFDF5" },
+            { location: "District Gilgit, Jutial", date: "March 23, 2026", status: "Approved", statusColor: "#10B981", statusBg: "#ECFDF5" },
+            { location: "District Hunza, Karimabad", date: "March 22, 2026", status: "Pending", statusColor: "#328CC1", statusBg: "#E0F4FF" },
           ].map((item, index) => (
             <div
               key={index}
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer gap-2"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 sm:p-5 border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 cursor-pointer group gap-3"
               onClick={() => navigate("/my-submissions")}
             >
               <div className="flex-1 min-w-0">
-                <p className="text-sm sm:text-base text-gray-900 font-medium truncate">{item.location}</p>
-                <p className="text-xs sm:text-sm text-gray-500">{item.date}</p>
+                <p className="text-sm sm:text-base font-semibold text-gray-900 truncate">{item.location}</p>
+                <p className="text-xs sm:text-sm text-gray-500 mt-1">{item.date}</p>
               </div>
               <span
-                className="px-3 py-1 rounded-full text-xs sm:text-sm font-medium flex-shrink-0 w-fit"
+                className="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold flex-shrink-0 w-fit whitespace-nowrap"
                 style={{ 
-                  backgroundColor: `${item.statusColor}15`,
+                  backgroundColor: item.statusBg,
                   color: item.statusColor
                 }}
               >
@@ -104,9 +136,10 @@ export function Dashboard() {
             </div>
           ))}
         </div>
+
         <button
           onClick={() => navigate("/my-submissions")}
-          className="w-full mt-4 py-2 sm:py-3 rounded-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-50 transition-all text-sm sm:text-base"
+          className="btn-outline btn-lg btn-full mt-6 sm:hidden"
         >
           View All Submissions
         </button>

@@ -1,0 +1,288 @@
+/* ============================================
+   RESPONSIVE DESIGN UTILITIES & EXTENSIONS
+   ============================================ */
+
+/* Mobile-First Responsive Framework */
+
+/* ============================================
+   FLUID SPACING SYSTEM
+   ============================================ */
+
+/* Responsive padding - scales based on screen size */
+.px-fluid-sm {
+  @apply px-4 sm:px-6 md:px-8;
+}
+
+.px-fluid-md {
+  @apply px-6 sm:px-8 md:px-10;
+}
+
+.py-fluid-sm {
+  @apply py-4 sm:py-6 md:py-8;
+}
+
+.py-fluid-md {
+  @apply py-6 sm:py-8 md:py-10;
+}
+
+/* ============================================
+   FLUID TYPOGRAPHY
+   ============================================ */
+
+/* Responsive font sizes */
+.text-fluid-xs {
+  @apply text-xs sm:text-sm;
+}
+
+.text-fluid-sm {
+  @apply text-sm sm:text-base;
+}
+
+.text-fluid-base {
+  @apply text-base sm:text-lg md:text-xl;
+}
+
+.text-fluid-lg {
+  @apply text-lg sm:text-xl md:text-2xl;
+}
+
+.text-fluid-xl {
+  @apply text-xl sm:text-2xl md:text-3xl;
+}
+
+.text-fluid-2xl {
+  @apply text-2xl sm:text-3xl md:text-4xl;
+}
+
+/* ============================================
+   RESPONSIVE GRID LAYOUTS
+   ============================================ */
+
+/* Auto-responsive grids that adapt to content */
+.grid-responsive-auto {
+  @apply grid auto-cols-fr gap-4 sm:gap-6;
+}
+
+/* Standard responsive grid - 1 col on mobile, 2 on tablet, 3 on desktop */
+.grid-responsive-3 {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6;
+}
+
+/* Card grid - 1 col on mobile, 2 on tablet, 4 on desktop */
+.grid-responsive-4 {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6;
+}
+
+/* Two-column responsive grid */
+.grid-responsive-2 {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6;
+}
+
+/* ============================================
+   RESPONSIVE CONTAINERS
+   ============================================ */
+
+/* Responsive max-width container */
+.container-responsive {
+  @apply w-full px-4 sm:px-6 md:px-8 mx-auto;
+}
+
+/* Fluid width with max constraint */
+.w-fluid {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ============================================
+   RESPONSIVE IMAGES
+   ============================================ */
+
+/* Responsive image container */
+.img-responsive {
+  @apply w-full h-auto block;
+}
+
+/* Aspect ratio fixes for better image handling */
+.aspect-video-responsive {
+  @apply aspect-video object-cover w-full;
+}
+
+.aspect-square-responsive {
+  @apply aspect-square object-cover w-full;
+}
+
+/* ============================================
+   RESPONSIVE BUTTONS & INPUTS
+   ============================================ */
+
+/* Responsive button sizing */
+.btn-responsive {
+  @apply px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base rounded-lg transition-all;
+}
+
+/* Full-width button on mobile, auto on larger screens */
+.btn-full-mobile {
+  @apply w-full sm:w-auto;
+}
+
+/* Responsive input sizing */
+.input-responsive {
+  @apply w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg border border-gray-300 focus:outline-none focus:ring-2;
+}
+
+/* ============================================
+   RESPONSIVE FLEX LAYOUTS
+   ============================================ */
+
+/* Responsive flex direction - column on mobile, row on desktop */
+.flex-responsive {
+  @apply flex flex-col sm:flex-row;
+}
+
+/* Responsive gap */
+.gap-responsive {
+  @apply gap-3 sm:gap-4 md:gap-6;
+}
+
+/* ============================================
+   RESPONSIVE TABLE
+   ============================================ */
+
+/* Responsive table wrapper - scrollable on mobile */
+.table-responsive {
+  @apply overflow-x-auto;
+}
+
+/* Hide columns on mobile */
+.hide-mobile {
+  @apply hidden sm:block;
+}
+
+.hide-tablet {
+  @apply hidden md:block;
+}
+
+/* Show only on mobile */
+.show-mobile {
+  @apply block sm:hidden;
+}
+
+/* ============================================
+   RESPONSIVE SIDEBAR/DRAWER
+   ============================================ */
+
+/* Sidebar responsive state */
+.sidebar-responsive {
+  @apply flex flex-col sm:flex-row;
+}
+
+/* Mobile drawer state */
+.drawer-mobile {
+  @apply fixed inset-0 z-50 sm:z-auto sm:position-static;
+}
+
+/* ============================================
+   TYPOGRAPHY RESPONSIVE
+   ============================================ */
+
+/* Line height responsive - tighter on mobile, looser on desktop */
+.leading-responsive {
+  @apply leading-relaxed md:leading-7;
+}
+
+/* ============================================
+   RESPONSIVE STATES & UTILITIES
+   ============================================ */
+
+/* Hover effects disabled on mobile */
+@media (hover: hover) {
+  .hover-active {
+    @apply hover:shadow-lg hover:scale-105;
+  }
+}
+
+/* Touch-friendly sizing on mobile */
+.touch-target {
+  @apply min-h-12 min-w-12;
+}
+
+/* ============================================
+   BREAKPOINT VARIABLES FOR CONSISTENCY
+   ============================================ */
+
+/*
+  Tailwind breakpoints (used throughout the app):
+  - sm: 640px   (small devices, tablets)
+  - md: 768px   (medium devices, tablets landscape)
+  - lg: 1024px  (desktop)
+  - xl: 1280px  (large desktop)
+  - 2xl: 1536px (extra large screens)
+
+  Usage in classes:
+  - sm:text-lg = 640px and up
+  - md:grid-cols-2 = 768px and up
+  - lg:grid-cols-4 = 1024px and up
+*/
+
+/* ============================================
+   MOBILE-FIRST OPTIMIZATION
+   ============================================ */
+
+/* Ensure full viewport on mobile */
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Prevent zoom on input focus (iOS) */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
+input[type="password"],
+select,
+textarea {
+  font-size: 16px; /* Prevents auto-zoom on iOS */
+}
+
+/* ============================================
+   ORIENTATION-SPECIFIC STYLES
+   ============================================ */
+
+@media (orientation: landscape) and (max-height: 500px) {
+  /* Adjust spacing for landscape mobile */
+  .py-fluid-md {
+    @apply py-4 sm:py-6;
+  }
+}
+
+/* ============================================
+   CROSS-BROWSER COMPATIBILITY
+   ============================================ */
+
+/* Smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better touch-action for mobile */
+body {
+  -webkit-touch-callout: none;
+  -webkit-appearance: none;
+}
+
+/* Fix for input styling on iOS */
+input,
+textarea,
+select,
+button {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}

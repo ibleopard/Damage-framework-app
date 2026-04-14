@@ -6,6 +6,7 @@ import { AdminDashboard } from "./components/AdminDashboard";
 import { SubmissionDetail } from "./components/SubmissionDetail";
 import { AIAutoFill } from "./components/AIAutoFill";
 import { MySubmissions } from "./components/MySubmissions";
+import { ManualForm } from "./components/ManualForm";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
   {
     path: "/new-assessment",
     Component: NewAssessment,
+  },
+  {
+    path: "/manual-form",
+    Component: ManualForm,
   },
   {
     path: "/my-submissions",

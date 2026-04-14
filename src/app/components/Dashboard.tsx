@@ -38,7 +38,7 @@ export function Dashboard() {
                 className="btn-primary btn-lg group flex items-center justify-center"
               >
                 <FileText className="w-5 h-5" />
-                <span>Start New Assessment</span>
+                <span>New Report</span>
                 <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity ml-1" />
               </button>
               <button

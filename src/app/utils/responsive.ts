@@ -3,6 +3,8 @@
  * Provides reusable responsive patterns and utility functions
  */
 
+import React from 'react';
+
 export const ResponsiveUtils = {
   /**
    * Breakpoint values matching Tailwind CSS
@@ -159,5 +161,3 @@ export function useMediaQuery(query: string): boolean {
 
   return matches;
 }
-
-import React from 'react';

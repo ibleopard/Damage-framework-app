@@ -26,20 +26,20 @@ export function AIAutoFill() {
   };
 
   const mockExtractedData = {
-    province: "Gilgit-Baltistan",
-    city: "District Ghanche",
-    village: "Ghulshan-e-Kabbir",
-    latitude: "35°11'55\"N",
-    longitude: "76°36'01\"E",
-    dateOfEvent: "21st to 23rd July 2025",
-    typeOfEvent: "Flood",
-    infrastructureAffected: "Water Supply Systems - Drinking Water Supply",
-    damageDescription: "Water Supply pipe line",
-    structureType: "Public",
-    ownership: "Public",
-    damageExtent: "Minor (Minor Repair Req)",
-    estimatedCost: "1474360/-",
-    assessmentTeam: "C&W Department Ghanche",
+    province: "",
+    city: "",
+    village: "",
+    latitude: "",
+    longitude: "",
+    dateOfEvent: "",
+    typeOfEvent: "",
+    infrastructureAffected: "",
+    damageDescription: "",
+    structureType: "",
+    ownership: "",
+    damageExtent: "",
+    estimatedCost: "",
+    assessmentTeam: "",
   };
 
   return (

@@ -69,7 +69,6 @@ export function NewAssessment() {
   };
 
   const handleSubmit = () => {
-    // Mock submission
     alert("Assessment submitted successfully!");
     navigate("/dashboard");
   };
@@ -92,9 +91,8 @@ export function NewAssessment() {
   };
 
   const autoDetectLocation = () => {
-    // Mock GPS detection
-    updateFormData("latitude", "35.1988 N");
-    updateFormData("longitude", "76.6003 E");
+    updateFormData("latitude", "");
+    updateFormData("longitude", "");
   };
 
   return (

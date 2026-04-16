@@ -13,68 +13,7 @@ export function AdminDashboard() {
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [selectedDamage, setSelectedDamage] = useState("all");
 
-  const submissions = [
-    {
-      id: "AS-2026-001",
-      location: "District Ghanche, Ghulshan-e-Kabbir",
-      damageLevel: "Minor",
-      date: "March 25, 2026",
-      status: "Pending",
-      statusColor: "#328CC1",
-      statusBg: "#E0F4FF",
-      inspector: "Field Inspector #42",
-    },
-    {
-      id: "AS-2026-002",
-      location: "District Skardu, Sadpara",
-      damageLevel: "Moderate",
-      date: "March 24, 2026",
-      status: "Approved",
-      statusColor: "#10B981",
-      statusBg: "#ECFDF5",
-      inspector: "Field Inspector #38",
-    },
-    {
-      id: "AS-2026-003",
-      location: "District Gilgit, Jutial",
-      damageLevel: "Minor",
-      date: "March 23, 2026",
-      status: "Approved",
-      statusColor: "#10B981",
-      statusBg: "#ECFDF5",
-      inspector: "Field Inspector #42",
-    },
-    {
-      id: "AS-2026-004",
-      location: "District Hunza, Karimabad",
-      damageLevel: "Severe",
-      date: "March 22, 2026",
-      status: "Under Review",
-      statusColor: "#F59E0B",
-      statusBg: "#FFFBEB",
-      inspector: "Field Inspector #15",
-    },
-    {
-      id: "AS-2026-005",
-      location: "District Astore, Bulen",
-      damageLevel: "Moderate",
-      date: "March 21, 2026",
-      status: "Rejected",
-      statusColor: "#EF4444",
-      statusBg: "#FEF2F2",
-      inspector: "Field Inspector #23",
-    },
-    {
-      id: "AS-2026-006",
-      location: "District Diamer, Chilas",
-      damageLevel: "Severe",
-      date: "March 20, 2026",
-      status: "Pending",
-      statusColor: "#328CC1",
-      statusBg: "#E0F4FF",
-      inspector: "Field Inspector #19",
-    },
-  ];
+  const submissions = [];
 
   const stats = [
     { label: "Total Submissions", value: "234", color: "#0B3C5D", icon: FileText },

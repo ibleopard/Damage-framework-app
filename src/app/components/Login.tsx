@@ -9,7 +9,6 @@ export function Login() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock authentication
     if (email && password) {
       navigate("/dashboard");
     }

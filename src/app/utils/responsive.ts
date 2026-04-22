@@ -3,7 +3,7 @@
  * Provides reusable responsive patterns and utility functions
  */
 
-import React from 'react';
+import { useState, useEffect } from 'react';
 
 export const ResponsiveUtils = {
   /**
@@ -83,15 +83,15 @@ export const ResponsiveUtils = {
  * Provides responsive breakpoint information
  */
 export function useResponsive() {
-  const [isMobile, setIsMobile] = React.useState(false);
-  const [isTablet, setIsTablet] = React.useState(false);
-  const [isDesktop, setIsDesktop] = React.useState(false);
-  const [windowSize, setWindowSize] = React.useState({
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [windowSize, setWindowSize] = useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
     height: typeof window !== 'undefined' ? window.innerHeight : 0,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
@@ -147,9 +147,9 @@ export function getGridColsClass(cols: 2 | 3 | 4 = 3): string {
  * Utility to check if a media query matches
  */
 export function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = React.useState(false);
+  const [matches, setMatches] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const mediaQuery = window.matchMedia(query);
     setMatches(mediaQuery.matches);
 
